@@ -6,10 +6,27 @@
  
  $conn = mysqli_connect( $server,$username,$password,$database);
 
- 
- 
- 
- ?>
+ if( isset($_POST["submitButton"]))
+ {
+    //1. fetch form data
+    $firstName = $_POST['firstname'];
+    $lastName =  $_POST['lastname'];
+    $phone = $_POST['phonenumber'];
+    $email = $_POST['email'];
+    $message = $_POST['message'];
+
+    //2.submit form data
+    $insertData = mysqli_query( $conn, "INSERT INTO 
+    contactus(firstname,lastname,phonenumber,email,message)
+    VALUES(' $firstName','$lastName','$phone','$email','$message')");
+    if($insertData){
+        echo "Data submitted successfully";
+    }
+    else{
+        echo "error occured";
+    }
+}
+?>
  
  <!DOCTYPE html>
  <html lang="en">
@@ -23,7 +40,7 @@
  </head>
  <body>
   <!-- Navbar design begins -->
-     <nav class="navbar navbar-expand-lg bg-light fixed-top shadow">
+     <!-- <nav class="navbar navbar-expand-lg bg-light fixed-top shadow">
          <div class="container-fluid">
             <a href="index.php" class="navbar-brand">Zalego Academy</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#menus">
@@ -37,7 +54,7 @@
                 </div>
             </div>
          </div>
-     </nav>
+     </nav> -->
    <!-- Navbar design ends here -->
     <main class="p-5 bg-light mb-4 " >
         <h1>Welcome, Nathaniel Kung'u</h1>
@@ -75,30 +92,31 @@
                 <div class="row">
                      <div class="mb-3 col-lg-6">
                         <label for="firstName" class="form-label">First Name</label>
-                        <input type="text" class="form-control" placeholder="Enter your first name">
+                        <input type="text" name="firstname" class="form-control" placeholder="Enter your first name">
                     </div>
                     <div class="mb-3 col-lg-6">
                         <label for="lastName" class="form-label">Last Name</label>
-                        <input type="text" class="form-control" placeholder="Enter your last name">
+                        <input type="text" name="lastname" class="form-control" placeholder="Enter your last name">
                     </div>
                 </div>
                 <div class="row">
                      <div class="mb-3 col-lg-6">
                         <label for="phoneNumber" class="form-label">Phone number</label>
-                        <input type="tel" class="form-control" placeholder="Enter your Telephone number">
+                        <input type="tel" name="phonenumber" class="form-control" placeholder="Enter your Telephone number">
                     </div>
                     <div class="mb-3 col-lg-6">
                         <label for="email" class="form-label">E-mail</label>
-                        <input type="email" class="form-control" placeholder="Enter your e-mail">
+                        <input type="email" name ="email" class="form-control" placeholder="Enter your e-mail">
                     </div>
                 </div>
                  <div class="row">
                     <div class="mb-3 col-lg-12">
-                        <label for="mesage" class="form-label">Your message</label>
-                        <textarea cols="30" rows="5" class="form-control"></textarea>
+                        <label for="message" name ="message" class="form-label">Your message</label>
+                        <input type="text" name ="message" class="form-control" placeholder="Enter your contribution">
+                        <!-- <textarea cols="30" rows="5" class="form-control"></textarea> -->
                     </div>
                 </div>
-               <button type="submit" class="btn btn-primary">Send a messsage</button> 
+               <button type="submit" name = "submitButton" class="btn btn-primary">Send a messsage</button> 
             </form>
          </div>
          <!-- Contact us form ends -->
